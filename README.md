@@ -205,6 +205,35 @@ Automatically creates clickable links for:
 2. Use the core classes in your own scripts
 3. Process multiple meetings programmatically
 
+## 🚀 Future Automation Vision
+
+### Seamless Notion Integration
+The current workflow requires running local scripts, but this could be transformed into a fully automated, "upload-and-forget" experience:
+
+**Proposed Workflow:**
+1. **Upload transcript** directly to a Notion page's "Files & media" property
+2. **Notion webhook** automatically detects the file upload
+3. **External automation** (serverless function) triggers and:
+   - Downloads the transcript from Notion
+   - Runs the AI processing and entity linking
+   - Updates the Notion page with structured summary
+   - Adds clickable links to people and projects
+4. **User sees results** automatically appear on the page
+
+**Benefits:**
+- ✅ **No local script execution** required
+- ✅ **Works from any device** with Notion access
+- ✅ **Real-time processing** triggered by file uploads
+- ✅ **Seamless user experience** within Notion interface
+- ✅ **Scalable architecture** using cloud functions
+
+**Implementation Options:**
+- **Serverless Functions** (AWS Lambda, Google Cloud Functions)
+- **Webhook Automation** (Zapier, Make.com)
+- **Custom Web Server** (Flask/Django app)
+
+This would transform the current powerful local toolkit into a production-ready, automated meeting intelligence system.
+
 ## 🧪 Testing
 
 ### Test Scripts
@@ -295,6 +324,7 @@ For issues and questions:
 - ✅ Rich text formatting
 
 ### Roadmap
+- [ ] **Notion Webhook Integration** - Automated processing triggered by file uploads
 - [ ] Batch transcript processing
 - [ ] Custom entity types
 - [ ] Meeting templates
