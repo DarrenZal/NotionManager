@@ -1,0 +1,27 @@
+Meeting: Weekly Team Standup
+Date: 2025-05-28
+Time: 10:00 AM
+
+John: Good morning everyone. Let's start with our weekly standup. Sarah, can you give us an update on the client project?
+
+Sarah: Sure! I've completed the initial wireframes for the dashboard. The client feedback was positive, but they want us to add a new analytics section. I'll need to coordinate with Mike on the backend API for that.
+
+Mike: I can have the analytics API ready by Friday. Sarah, let's sync up tomorrow to go over the data structure.
+
+John: Great. What about the mobile app, Alex?
+
+Alex: The iOS version is almost done. Just fixing some UI bugs. Android version should be ready for testing next week. I'll need someone to help with QA testing.
+
+Sarah: I can help with QA testing on Thursday and Friday.
+
+John: Perfect. Any blockers or concerns?
+
+Mike: The database migration is taking longer than expected. Might need to push the deployment to next Monday instead of Friday.
+
+John: Okay, let's plan for Monday deployment then. Action items: Sarah will coordinate with Mike on analytics API, Alex will finish mobile app bugs, and Sarah will help with QA testing. Mike, keep us posted on the database migration progress.
+
+Sarah: Sounds good. Should we schedule a deployment review meeting for Monday morning?
+
+John: Yes, let's do 9 AM Monday. I'll send out the calendar invite.
+
+Meeting ended at 10:25 AM.

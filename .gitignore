@@ -5,7 +5,9 @@ notion-env/
 .env
 
 # Transcript files (may contain sensitive data)
-transcript/
+transcript/*.txt
+!transcript/README.md
+!transcript/sample_meeting.txt
 
 # Python
 __pycache__/

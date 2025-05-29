@@ -94,21 +94,32 @@ Extract from your Notion database URLs:
 python notion_manager.py
 ```
 
-### 2. Process Transcripts into Meeting Pages
+### 2. Add Your Transcript Files
+
+```bash
+# Place your meeting transcript (.txt files) in the transcript directory
+# The directory structure will be:
+# transcript/
+# ├── README.md              # Instructions and examples
+# ├── sample_meeting.txt     # Sample file for testing
+# └── your_meeting.txt       # Your actual transcript files
+```
+
+### 3. Process Transcripts into Meeting Pages
 
 ```bash
 # Create a new meeting page from transcript
 python transcript_processor.py
 ```
 
-### 3. Update Existing Meeting Pages
+### 4. Update Existing Meeting Pages
 
 ```bash
 # Update an existing Notion page with AI-processed transcript
 python update_meeting.py "https://www.notion.so/Page-Title-{page_id}?p={page_id}&pm=c"
 ```
 
-### 4. Test People Linking
+### 5. Test People Linking
 
 ```bash
 # Test automatic people detection and linking
