@@ -115,8 +115,11 @@ python transcript_processor.py
 ### 4. Update Existing Meeting Pages
 
 ```bash
-# Update an existing Notion page with AI-processed transcript
+# Option 1: Interactive file selection (if multiple transcripts exist)
 python update_meeting.py "https://www.notion.so/Page-Title-{page_id}?p={page_id}&pm=c"
+
+# Option 2: Specify exact transcript filename
+python update_meeting.py "https://www.notion.so/Page-Title-{page_id}?p={page_id}&pm=c" "your_meeting.txt"
 ```
 
 ### 5. Test People Linking

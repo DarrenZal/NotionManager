@@ -5,19 +5,27 @@ This script updates an existing Notion meeting page with AI-processed transcript
 ## Usage
 
 ```bash
+# Option 1: Interactive file selection (if multiple transcripts exist)
 python update_meeting.py "<notion_page_url>"
+
+# Option 2: Specify exact transcript filename
+python update_meeting.py "<notion_page_url>" "transcript_filename.txt"
 ```
 
-## Example
+## Examples
 
 ```bash
-python update_meeting.py "https://www.notion.so/AWP-OS-1fd8b92ddc2f800a8fdcf8b771eeec11?p=2028b92ddc2f811ca933e7be5a1e00ee&pm=c"
+# Let the script help you choose from available transcript files
+python update_meeting.py "https://www.notion.so/Page-Title-{page_id}?p={page_id}&pm=c"
+
+# Use a specific transcript file
+python update_meeting.py "https://www.notion.so/Page-Title-{page_id}?p={page_id}&pm=c" "team-meeting-2025-05-28.txt"
 ```
 
 ## What it does
 
 1. **Extracts page ID** from the Notion URL
-2. **Finds transcript file** in `/Users/darrenzal/AWP/transcript/` (uses most recent .txt file)
+2. **Finds transcript file** in `./transcript/` directory (interactive selection or specified filename)
 3. **Processes transcript** with AI to extract:
    - Attendees
    - Summary
@@ -28,7 +36,7 @@ python update_meeting.py "https://www.notion.so/AWP-OS-1fd8b92ddc2f800a8fdcf8b77
 
 ## Requirements
 
-- Transcript file must be in `/Users/darrenzal/AWP/transcript/` as a .txt file
+- Transcript file must be in `./transcript/` directory as a .txt file
 - Environment variables must be set (NOTION_TOKEN, DATABASE_ID, OPENAI_API_KEY)
 - The Notion page must have a "Text" property (rich text field) to update
 
@@ -78,7 +86,7 @@ The script will **append** to the Notion page (preserving existing content) with
 
 ## Testing
 
-A sample transcript has been created at `/Users/darrenzal/AWP/transcript/sample_meeting.txt` for testing.
+A sample transcript has been created at `./transcript/sample_meeting.txt` for testing.
 
 ## Troubleshooting
 
