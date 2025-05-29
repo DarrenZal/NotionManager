@@ -1,0 +1,27 @@
+# Virtual environment
+notion-env/
+
+# Environment variables
+.env
+
+# Transcript files (may contain sensitive data)
+transcript/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
