@@ -51,16 +51,19 @@ def extract_page_id_from_url(url: str) -> Optional[str]:
     
     return None
 
-def find_transcript_file(transcript_dir: str = "./transcript") -> Optional[str]:
+def find_transcript_file(transcript_dir: str = "./transcript", specific_file: Optional[str] = None) -> Optional[str]:
     """
-    Find the most recent transcript file in the transcript directory.
+    Find a transcript file in the transcript directory.
     
     Args:
         transcript_dir: Directory containing transcript files
+        specific_file: Specific filename to use (optional)
         
     Returns:
         Path to transcript file or None if not found
     """
+    from datetime import datetime
+    
     if not os.path.exists(transcript_dir):
         print(f"❌ Transcript directory not found: {transcript_dir}")
         return None
@@ -72,10 +75,50 @@ def find_transcript_file(transcript_dir: str = "./transcript") -> Optional[str]:
         print(f"❌ No .txt files found in {transcript_dir}")
         return None
     
-    # Get the most recent file
-    most_recent = max(txt_files, key=os.path.getmtime)
-    print(f"📄 Found transcript file: {most_recent}")
-    return most_recent
+    # If specific file requested, try to find it
+    if specific_file:
+        specific_path = os.path.join(transcript_dir, specific_file)
+        if os.path.exists(specific_path):
+            print(f"📄 Using specified transcript file: {specific_path}")
+            return specific_path
+        else:
+            print(f"❌ Specified file not found: {specific_path}")
+            return None
+    
+    # If multiple files, let user choose
+    if len(txt_files) > 1:
+        print(f"\n📁 Found {len(txt_files)} transcript files:")
+        for i, file_path in enumerate(txt_files, 1):
+            filename = os.path.basename(file_path)
+            file_size = os.path.getsize(file_path)
+            mod_time = os.path.getmtime(file_path)
+            mod_date = datetime.fromtimestamp(mod_time).strftime('%Y-%m-%d %H:%M')
+            print(f"  {i}. {filename} ({file_size:,} bytes, modified: {mod_date})")
+        
+        while True:
+            try:
+                choice = input(f"\nSelect a file (1-{len(txt_files)}): ").strip()
+                if choice.lower() in ['q', 'quit', 'exit']:
+                    print("❌ Operation cancelled")
+                    return None
+                
+                file_index = int(choice) - 1
+                if 0 <= file_index < len(txt_files):
+                    selected_file = txt_files[file_index]
+                    print(f"📄 Selected transcript file: {selected_file}")
+                    return selected_file
+                else:
+                    print(f"❌ Invalid choice. Please enter a number between 1 and {len(txt_files)}")
+            except ValueError:
+                print("❌ Invalid input. Please enter a number or 'q' to quit")
+            except KeyboardInterrupt:
+                print("\n❌ Operation cancelled")
+                return None
+    
+    # Only one file, use it
+    selected_file = txt_files[0]
+    print(f"📄 Found transcript file: {selected_file}")
+    return selected_file
 
 def read_transcript_file(file_path: str) -> Optional[str]:
     """
@@ -1001,12 +1044,18 @@ def main():
     """
     Main function to update a meeting page with transcript processing.
     """
-    if len(sys.argv) != 2:
-        print("Usage: python update_meeting.py <notion_page_url>")
-        print("Example: python update_meeting.py 'https://www.notion.so/Page-Title-{page_id}?p={page_id}&pm=c'")
+    if len(sys.argv) < 2 or len(sys.argv) > 3:
+        print("Usage: python update_meeting.py <notion_page_url> [transcript_filename]")
+        print("")
+        print("Examples:")
+        print("  python update_meeting.py 'https://www.notion.so/Page-Title-{page_id}?p={page_id}&pm=c'")
+        print("  python update_meeting.py 'https://www.notion.so/Page-Title-{page_id}?p={page_id}&pm=c' my_meeting.txt")
+        print("")
+        print("If no transcript filename is provided, you'll be prompted to choose from available files.")
         sys.exit(1)
     
     page_url = sys.argv[1]
+    specific_filename = sys.argv[2] if len(sys.argv) == 3 else None
     
     print("🔄 Updating Notion meeting page with transcript processing")
     print("=" * 60)
@@ -1020,7 +1069,7 @@ def main():
     print(f"📄 Page ID: {page_id}")
     
     # Find transcript file
-    transcript_file = find_transcript_file()
+    transcript_file = find_transcript_file(specific_file=specific_filename)
     if not transcript_file:
         sys.exit(1)
     

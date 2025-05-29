@@ -14,7 +14,11 @@ This directory is where you should place your meeting transcript files for proce
 2. **Name the file** descriptively (e.g., `team-standup-2025-05-28.txt`)
 3. **Run the processing script**:
    ```bash
+   # Option 1: Let the script help you choose from available files
    python update_meeting.py "<notion_page_url>"
+   
+   # Option 2: Specify the exact filename
+   python update_meeting.py "<notion_page_url>" "your_transcript.txt"
    ```
 
 ## 🔄 Processing Workflow
